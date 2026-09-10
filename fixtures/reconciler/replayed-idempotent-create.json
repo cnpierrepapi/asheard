@@ -1,0 +1,68 @@
+{
+  "_source": "Synthetic. Reproduces the shape reported in awesome#315, where reusing an idempotency key returned 201 Created carrying a call that already existed, so a replay was indistinguishable from a new call. No call that happened is described here.",
+  "requestedAt": "2000-01-06T09:30:00Z",
+  "call": {
+    "id": "call_synthetic_replay_0001",
+    "status": "completed",
+    "task": "Confirm the appointment on Thursday at two.",
+    "task_completed": true,
+    "failure_code": null,
+    "completion_confidence": {
+      "score": 0.91,
+      "label": "high"
+    },
+    "structured_result": {
+      "answer": "confirmed",
+      "evidence": "The appointment was confirmed for Thursday."
+    },
+    "recipients": [
+      {
+        "phones": [
+          "+15550101"
+        ],
+        "status": "completed",
+        "attempts": [
+          {
+            "started_at": "2000-01-06T08:15:04.100000Z",
+            "completed_at": "2000-01-06T08:15:41.900000Z",
+            "failure_code": null,
+            "transcript_turns": [
+              {
+                "speaker": "bot",
+                "text": "Calling to confirm Thursday at two."
+              },
+              {
+                "speaker": "user",
+                "text": "Yes, that works."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "events": {
+    "object": "list",
+    "data": [
+      {
+        "id": "evt_synthetic_replay_0001",
+        "type": "call.queued",
+        "call_id": "call_synthetic_replay_0001",
+        "created_at": "2000-01-06T08:15:00Z",
+        "level": "info",
+        "status": "queued",
+        "message": "Call queued."
+      },
+      {
+        "id": "evt_synthetic_replay_0002",
+        "type": "call.completed",
+        "call_id": "call_synthetic_replay_0001",
+        "created_at": "2000-01-06T08:15:42Z",
+        "level": "info",
+        "status": "completed",
+        "message": "Call completed."
+      }
+    ],
+    "next_cursor": null
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "_source": "Synthetic. An ordinary call that went the way calls are supposed to go, written to keep a briefing honest. A set made only of defects would make the reader think everything is broken.",
+  "call": {
+    "id": "call_synthetic_routine_0004",
+    "status": "completed",
+    "task": "Ask whether a callback on Monday suits.",
+    "task_completed": true,
+    "completion_confidence": {
+      "score": 0.88,
+      "label": "high"
+    },
+    "structured_result": {
+      "answer": "yes",
+      "evidence": "The person agreed to a callback on Monday morning."
+    },
+    "recipients": [
+      {
+        "status": "completed",
+        "structured_result": {
+          "answered_by": "human"
+        },
+        "attempts": [
+          {
+            "started_at": "2000-01-06T08:31:04.221000Z",
+            "completed_at": "2000-01-06T08:31:49.880000Z",
+            "failure_code": null,
+            "transcript_turns": [
+              {
+                "speaker": "bot",
+                "text": "Ask whether a callback on Monday suits."
+              },
+              {
+                "speaker": "user",
+                "text": "The person agreed to a callback on Monday morning."
+              },
+              {
+                "speaker": "bot",
+                "text": "Thank you, that is all I needed."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "failure_code": null,
+    "failure_message": null
+  }
+}

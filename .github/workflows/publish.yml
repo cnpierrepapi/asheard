@@ -1,0 +1,47 @@
+name: publish
+
+# Publishing happens here rather than from a laptop so npm can attest where the
+# tarball came from. That attestation is the provenance badge on the package
+# page, and it is only issued to a build npm can trace back to a public commit.
+#
+# Push a tag to release:
+#   npm version patch && git push --follow-tags
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Lets the runner mint the OIDC token npm uses to attest the build.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - name: Check the tag matches the version being published
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$version" ]; then
+            echo "Tag $tag does not match package version $version."
+            exit 1
+          fi
+
+      - run: npm test
+
+      - run: npm run matrix
+
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

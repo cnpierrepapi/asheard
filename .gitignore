@@ -1,0 +1,24 @@
+node_modules/
+dist/
+*.log
+.env
+.env.local
+.DS_Store
+
+# next
+call-review-console/.next/
+call-review-console/node_modules/
+call-review-console/out/
+
+CLAUDE.md
+AGENTS.md
+
+# agent skill bundles dropped in by marketplace integrations
+.claude/
+.agents/
+skills-lock.json
+
+# raw output from real calls. never committed.
+artifacts/
+
+.vercel

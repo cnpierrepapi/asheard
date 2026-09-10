@@ -1,0 +1,73 @@
+{
+  "name": "asheard",
+  "version": "0.2.2",
+  "description": "Normalize how a CALL-E phone call ended across the Calls API, Goal Runs and MCP, with the provenance for every reading.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test \"dist/test/**/*.test.js\"",
+    "matrix": "npm run build && node dist/scripts/print-matrix.js",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    },
+    "./disposition": {
+      "types": "./dist/src/disposition/index.d.ts",
+      "import": "./dist/src/disposition/index.js"
+    },
+    "./ledger": {
+      "types": "./dist/src/ledger/index.d.ts",
+      "import": "./dist/src/ledger/index.js"
+    },
+    "./calle": {
+      "types": "./dist/src/calle/client.d.ts",
+      "import": "./dist/src/calle/client.js"
+    },
+    "./fixtures/*": "./fixtures/*",
+    "./reconciler": {
+      "types": "./dist/src/reconciler/index.d.ts",
+      "import": "./dist/src/reconciler/index.js"
+    }
+  },
+  "files": [
+    "dist/src",
+    "fixtures",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnpierrepapi/asheard.git"
+  },
+  "homepage": "https://github.com/cnpierrepapi/asheard#readme",
+  "bugs": {
+    "url": "https://github.com/cnpierrepapi/asheard/issues"
+  },
+  "keywords": [
+    "call-e",
+    "phone-call",
+    "voice-agent",
+    "webhook",
+    "disposition",
+    "provenance",
+    "mcp"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

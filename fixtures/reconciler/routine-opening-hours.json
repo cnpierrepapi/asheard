@@ -1,0 +1,48 @@
+{
+  "_source": "Synthetic. An ordinary call that went the way calls are supposed to go, written to keep a briefing honest. A set made only of defects would make the reader think everything is broken.",
+  "call": {
+    "id": "call_synthetic_routine_0003",
+    "status": "completed",
+    "task": "Ask what time the counter opens on Saturday.",
+    "task_completed": true,
+    "completion_confidence": {
+      "score": 0.88,
+      "label": "high"
+    },
+    "structured_result": {
+      "answer": "09:00",
+      "evidence": "The person said they open at nine on Saturdays."
+    },
+    "recipients": [
+      {
+        "status": "completed",
+        "structured_result": {
+          "answered_by": "human"
+        },
+        "attempts": [
+          {
+            "started_at": "2000-01-06T08:24:04.221000Z",
+            "completed_at": "2000-01-06T08:24:49.880000Z",
+            "failure_code": null,
+            "transcript_turns": [
+              {
+                "speaker": "bot",
+                "text": "Ask what time the counter opens on Saturday."
+              },
+              {
+                "speaker": "user",
+                "text": "The person said they open at nine on Saturdays."
+              },
+              {
+                "speaker": "bot",
+                "text": "Thank you, that is all I needed."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "failure_code": null,
+    "failure_message": null
+  }
+}

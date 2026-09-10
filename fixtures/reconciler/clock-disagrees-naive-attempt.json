@@ -1,0 +1,49 @@
+{
+  "_source": "Synthetic. Reproduces the shape reported in awesome#196 and calle-docs#42, where a failed attempt carried timestamps with no offset and start equal to end, contradicting the event stream. No call that happened is described here.",
+  "call": {
+    "id": "call_synthetic_clock_0001",
+    "status": "failed",
+    "task": "Ask whether the line is open on Saturday.",
+    "task_completed": false,
+    "failure_code": "call_failed",
+    "failure_message": "calling task status=NO ANSWER (Hangup by: bot)",
+    "structured_result": null,
+    "recipients": [
+      {
+        "phones": ["+15550102"],
+        "status": "failed",
+        "attempts": [
+          {
+            "started_at": "2000-01-06T07:41:26",
+            "completed_at": "2000-01-06T07:41:26",
+            "failure_code": "408"
+          }
+        ]
+      }
+    ]
+  },
+  "events": {
+    "object": "list",
+    "data": [
+      {
+        "id": "evt_synthetic_clock_0001",
+        "type": "call.queued",
+        "call_id": "call_synthetic_clock_0001",
+        "created_at": "2000-01-06T11:41:20Z",
+        "level": "info",
+        "status": "queued",
+        "message": "Call queued."
+      },
+      {
+        "id": "evt_synthetic_clock_0002",
+        "type": "call.failed",
+        "call_id": "call_synthetic_clock_0001",
+        "created_at": "2000-01-06T11:42:53Z",
+        "level": "error",
+        "status": "failed",
+        "message": "Call failed."
+      }
+    ],
+    "next_cursor": null
+  }
+}
