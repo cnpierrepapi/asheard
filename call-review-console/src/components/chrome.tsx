@@ -42,12 +42,17 @@ export function Chrome() {
         className="flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.2em] transition hover:opacity-70"
         style={{ color: "var(--paper)" }}
       >
-        <span
-          aria-hidden="true"
-          className="inline-block h-[9px] w-[9px]"
-          style={{ background: "var(--signal)" }}
-        />
-        asheard
+        <svg aria-hidden="true" viewBox="0 0 64 64" className="h-[15px] w-[15px]">
+          <polygon
+            points="32,8 52.78,20 52.78,44 32,56 11.22,44 11.22,20"
+            fill="none"
+            stroke="var(--signal)"
+            strokeWidth="7"
+            strokeLinejoin="round"
+          />
+          <polygon points="32,22 40.66,27 40.66,37 32,42 23.34,37 23.34,27" fill="var(--signal)" />
+        </svg>
+        as heard
       </Link>
       <div className="flex items-baseline gap-6">
         {LINKS.map((link) => {

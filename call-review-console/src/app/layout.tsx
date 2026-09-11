@@ -13,10 +13,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const DESCRIPTION =
+  "CALL-E says the job's done. As Heard checks who actually picked up, and points at the field it read.";
+
 export const metadata: Metadata = {
-  title: "Call review console",
-  description:
-    "Read how a phone call ended, and see which field said so. Three separate answers, with the provenance on each one.",
+  metadataBase: new URL("https://asheard.vercel.app"),
+  applicationName: "As Heard",
+  title: { default: "As Heard", template: "%s · As Heard" },
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "As Heard",
+    title: "As Heard",
+    description: DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "As Heard",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

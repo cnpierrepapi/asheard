@@ -1,6 +1,8 @@
 # asheard
 
-Read how a phone call ended, and know which field said so.
+![As Heard](https://raw.githubusercontent.com/cnpierrepapi/asheard/main/docs/logo.png)
+
+Read how a phone call ended, and know which field said so. Live at [asheard.vercel.app](https://asheard.vercel.app).
 
 CALL-E reports the end of a call through three entry points, and they do not agree with each other. MCP has a status for `VOICEMAIL` and one for `BUSY`. Goal Runs has neither. The Calls API has a `failure_code` with no published enum, and their own errors guide tells you not to branch on it. Same call, three vocabularies, and code that treats one as the other is where the bugs live.
 
