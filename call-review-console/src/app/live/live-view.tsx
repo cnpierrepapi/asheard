@@ -62,9 +62,9 @@ interface Lane {
 type Phase = "idle" | "placing" | "running" | "done";
 
 const BASIS_COLOR: Record<string, string> = {
-  quoted: "text-emerald-700",
-  derived: "text-amber-700",
-  absent: "text-neutral-500",
+  quoted: "text-[var(--quoted)]",
+  derived: "text-[var(--derived)]",
+  absent: "text-[var(--paper-faint)]",
 };
 
 const TERMINAL = ["completed", "failed", "canceled"];
@@ -206,11 +206,11 @@ export function LiveView({ destinations }: { destinations: PublicDestination[] }
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <header className="max-w-2xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">Live</p>
-        <h1 className="mt-3 text-4xl font-semibold leading-tight text-neutral-900">
+        <p className="text-xs uppercase tracking-[0.2em] text-[var(--paper-faint)]">Live</p>
+        <h1 className="mt-3 text-4xl font-semibold leading-tight text-[var(--paper)]">
           The same number, called twice, one question apart.
         </h1>
-        <p className="mt-4 text-lg leading-relaxed text-neutral-600">
+        <p className="mt-4 text-lg leading-relaxed text-[var(--paper-dim)]">
           Both calls come back finished, with the job marked done and a confident score on it. The
           second request adds one thing: it asks CALL-E who picked up. Their own guide says you have
           to ask, because the API has no field for it. Watch what that one question changes.
@@ -228,12 +228,12 @@ export function LiveView({ destinations }: { destinations: PublicDestination[] }
                 onClick={() => setChosen(d.id)}
                 disabled={busy}
                 className={`border-l-2 p-4 text-left transition ${
-                  active ? "border-neutral-900 bg-neutral-50" : "border-neutral-200 hover:border-neutral-400"
+                  active ? "border-[var(--signal)] bg-[var(--ground-2)]" : "border-[var(--rule)] hover:border-[var(--paper-faint)]"
                 } disabled:opacity-50`}
               >
-                <span className="block text-sm font-medium text-neutral-900">{d.label}</span>
-                <span className="mt-1 block font-mono text-xs text-neutral-500">{d.e164}</span>
-                <span className="mt-2 block text-xs leading-relaxed text-neutral-600">
+                <span className="block text-sm font-medium text-[var(--paper)]">{d.label}</span>
+                <span className="mt-1 block font-mono text-xs text-[var(--paper-faint)]">{d.e164}</span>
+                <span className="mt-2 block text-xs leading-relaxed text-[var(--paper-dim)]">
                   {d.expectation}
                 </span>
               </button>
@@ -241,14 +241,14 @@ export function LiveView({ destinations }: { destinations: PublicDestination[] }
           })}
         </div>
 
-        <p className="mt-4 max-w-2xl text-xs leading-relaxed text-neutral-500">{destination.why}</p>
+        <p className="mt-4 max-w-2xl text-xs leading-relaxed text-[var(--paper-faint)]">{destination.why}</p>
 
         <div className="mt-6 flex flex-wrap items-center gap-4">
           <button
             type="button"
             onClick={place}
             disabled={busy}
-            className="bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="bg-[var(--signal)] px-6 py-3 text-sm font-medium text-[var(--ground)] transition hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-40"
           >
             {phase === "placing"
               ? "Placing both calls"
@@ -257,22 +257,22 @@ export function LiveView({ destinations }: { destinations: PublicDestination[] }
                 : "Place both calls"}
           </button>
           {phase === "running" ? (
-            <span className="text-sm text-neutral-500">Ringing. {elapsed * 4} seconds in.</span>
+            <span className="text-sm text-[var(--paper-faint)]">Ringing. {elapsed * 4} seconds in.</span>
           ) : null}
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-[var(--paper-faint)]">
             Two calls, both to the number picked above.
           </span>
         </div>
 
         {notice !== "" ? (
-          <p className="mt-4 max-w-2xl border-l-2 border-red-500 bg-red-50 p-4 text-sm text-red-900">
+          <p className="mt-4 max-w-2xl border-l-2 border-[var(--alarm)] bg-[var(--ground-2)] p-4 text-sm text-[var(--paper)]">
             {notice}
           </p>
         ) : null}
       </section>
 
       {showLanes ? (
-        <section className="mt-12 grid gap-px border border-neutral-200 bg-neutral-200 lg:grid-cols-2">
+        <section className="mt-12 grid gap-px border border-[var(--rule)] bg-[var(--rule)] lg:grid-cols-2">
           {lanes.map((lane) => (
             <LaneView key={lane.asked ? "asked" : "notasked"} lane={lane} />
           ))}
@@ -287,24 +287,24 @@ export function LiveView({ destinations }: { destinations: PublicDestination[] }
 function LaneView({ lane }: { lane: Lane }) {
   const r = lane.reading;
   return (
-    <div className="bg-white p-6">
-      <p className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+    <div className="bg-[var(--ground)] p-6">
+      <p className="text-xs uppercase tracking-[0.2em] text-[var(--paper-faint)]">
         {lane.asked ? "Asked who picked up" : "Did not ask"}
       </p>
-      <p className="mt-2 font-mono text-[11px] leading-relaxed text-neutral-400">
+      <p className="mt-2 font-mono text-[11px] leading-relaxed text-[var(--paper-faint)]">
         {lane.asked
           ? "recipient_result_schema declares answered_by"
           : "no recipient_result_schema on the request"}
       </p>
 
       {lane.problem !== "" ? (
-        <p className="mt-5 border-l-2 border-red-500 pl-4 text-sm text-red-900">{lane.problem}</p>
+        <p className="mt-5 border-l-2 border-[var(--alarm)] pl-4 text-sm text-[var(--paper)]">{lane.problem}</p>
       ) : null}
 
       {r ? (
         <>
-          <div className="mt-6 border-t border-neutral-100 pt-5">
-            <p className="text-xs text-neutral-500">What CALL-E returns</p>
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
+            <p className="text-xs text-[var(--paper-faint)]">What CALL-E returns</p>
             <dl className="mt-3 grid grid-cols-2 gap-3">
               <Cell label="status" value={str(r.platform["status"])} />
               <Cell label="task_completed" value={str(r.platform["task_completed"])} />
@@ -313,26 +313,26 @@ function LaneView({ lane }: { lane: Lane }) {
             </dl>
           </div>
 
-          <div className="mt-6 border-t border-neutral-100 pt-5">
-            <p className="text-xs text-neutral-500">What actually happened</p>
-            <p className="mt-3 text-xl font-medium leading-snug text-neutral-900">
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
+            <p className="text-xs text-[var(--paper-faint)]">What actually happened</p>
+            <p className="mt-3 text-xl font-medium leading-snug text-[var(--paper)]">
               {r.spoken.line || r.because.summary}
             </p>
             {r.spoken.clauses.action ? (
-              <p className="mt-2 text-sm font-medium text-neutral-900">{r.spoken.clauses.action}</p>
+              <p className="mt-2 text-sm font-medium text-[var(--paper)]">{r.spoken.clauses.action}</p>
             ) : null}
 
             <div className="mt-5">
-              <p className="text-xs text-neutral-500">How it ended</p>
+              <p className="text-xs text-[var(--paper-faint)]">How it ended</p>
               <p className="mt-1 flex flex-wrap items-baseline gap-2">
-                <span className="font-mono text-sm text-neutral-900">
+                <span className="font-mono text-sm text-[var(--paper)]">
                   {r.evidence.read.endstate.value}
                 </span>
                 <span className={`text-xs ${BASIS_COLOR[r.evidence.read.endstate.basis]}`}>
                   {r.evidence.read.endstate.basis}
                 </span>
               </p>
-              <p className="mt-1 font-mono text-[11px] leading-relaxed text-neutral-400">
+              <p className="mt-1 font-mono text-[11px] leading-relaxed text-[var(--paper-faint)]">
                 {r.evidence.read.endstate.from.length > 0
                   ? `read from ${r.evidence.read.endstate.from.join(", ")}`
                   : "no field carries this"}
@@ -341,7 +341,7 @@ function LaneView({ lane }: { lane: Lane }) {
           </div>
         </>
       ) : lane.problem === "" ? (
-        <p className="mt-6 text-sm text-neutral-400">
+        <p className="mt-6 text-sm text-[var(--paper-faint)]">
           Nothing to say yet. This side stays empty rather than guessing.
         </p>
       ) : null}
@@ -368,8 +368,8 @@ function Punchline({ lanes }: { lanes: Lane[] }) {
   const right = asked.evidence.read.endstate;
 
   return (
-    <section className="mt-10 border-l-2 border-neutral-900 bg-neutral-50 p-6">
-      <p className="max-w-3xl text-lg leading-relaxed text-neutral-900">
+    <section className="mt-10 border-l-2 border-[var(--signal)] bg-[var(--ground-2)] p-6">
+      <p className="max-w-3xl text-lg leading-relaxed text-[var(--paper)]">
         {sameOnTheLeft
           ? `Both calls came back ${str(notAsked.platform["status"])} with the job marked ${str(notAsked.platform["task_completed"])}. `
           : "The two calls did not come back the same on the platform's own fields, so read them side by side rather than as a pair. "}
@@ -377,7 +377,7 @@ function Punchline({ lanes }: { lanes: Lane[] }) {
           ? `Only the one that asked can say who picked up. Without the question the ending is "${left.value}" and nothing carries it. With it, the ending is "${right.value}", read straight off a field.`
           : `The endings read "${left.value}" and "${right.value}".`}
       </p>
-      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-neutral-600">
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--paper-dim)]">
         That is the whole difference. One field on the request, and a call that looked finished
         becomes a call you can see the shape of. The field costs nothing and almost nobody sends it,
         because the field everyone actually branches on is task_completed.
@@ -389,8 +389,8 @@ function Punchline({ lanes }: { lanes: Lane[] }) {
 function Cell({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="font-mono text-[11px] text-neutral-500">{label}</dt>
-      <dd className="mt-1 font-mono text-sm text-neutral-900">{value}</dd>
+      <dt className="font-mono text-[11px] text-[var(--paper-faint)]">{label}</dt>
+      <dd className="mt-1 font-mono text-sm text-[var(--paper)]">{value}</dd>
     </div>
   );
 }
