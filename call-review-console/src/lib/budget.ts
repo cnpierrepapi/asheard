@@ -64,17 +64,20 @@ export async function spendOne(visitorId: string): Promise<BudgetVerdict> {
     const used = asCount(globalCount);
     const mine = asCount(visitorCount);
 
+    // Every attempt counts, refused or not, so a held-down button cannot dig
+    // past the cap. The wording says attempts for that reason: saying "calls"
+    // here claimed calls had gone out when some had been refused.
     if (mine > PER_VISITOR_CAP) {
       return {
         allowed: false,
-        reason: `You have placed ${PER_VISITOR_CAP} calls today, which is the limit for one visitor. The recorded examples below still work.`,
+        reason: `You've hit today's limit of ${PER_VISITOR_CAP} call attempts from here, so nothing was dialled. The briefing and the paste page still work without placing a call.`,
       };
     }
     if (used > DAILY_CALL_CAP) {
       return {
         allowed: false,
         reason:
-          "Today's demo calls have all been used. The recorded examples below show the same thing without spending a call.",
+          "Today's demo call attempts have all been used, so nothing was dialled. The briefing and the paste page still work without placing a call.",
       };
     }
 
